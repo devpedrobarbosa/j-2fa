@@ -2,6 +2,7 @@
 Java-based 2FA system using Google Auth
 
 Usage example:
+(can be found at ./src/main/java/me/pedrao/j2fa/example/ExampleApp)
 ```
 public static void main(String[] args) {
         // Instantiate J2FA
