@@ -20,4 +20,4 @@ public static void main(String[] args) {
         else System.out.println("Access denied. Invalid token.");
 }
 ```
-(can be found at ./src/main/java/me/pedrao/j2fa/example/ExampleApp)
+(can be found at ./src/main/java/me/pedrao/j2fa/example/ExampleApp.java)
