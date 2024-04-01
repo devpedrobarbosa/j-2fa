@@ -1,0 +1,45 @@
+plugins {
+    id 'java'
+}
+
+group = 'me.pedrao'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation platform('org.junit:junit-bom:5.9.1')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+
+    implementation 'commons-codec:commons-codec:1.16.1'
+    implementation 'com.google.zxing:javase:3.5.3'
+    implementation 'de.taimos:totp:1.0'
+    implementation 'org.xerial:sqlite-jdbc:3.45.2.0'
+
+    implementation 'org.projectlombok:lombok:1.18.32'
+    annotationProcessor 'org.projectlombok:lombok:1.18.32'
+}
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'me.pedrao.j2fa.example.ExampleApp'
+    }
+    from(configurations.runtimeClasspath.collect {
+        if(it.getName().matches('^lombok-[0-9.]*.jar$') ||
+                it.getName().matches('^api-[0-9.]*.jar$'))
+            return null
+        return it.isDirectory() ? it : zipTree(it)
+    }) {
+        exclude 'NOTICE'
+        exclude 'OSGI-INF/**'
+        exclude 'META-INF/**'
+        exclude 'LICENSE'
+        exclude 'module-info.class'
+    }
+}
+
+test {
+    useJUnitPlatform()
+}
